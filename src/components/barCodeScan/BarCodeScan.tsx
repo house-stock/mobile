@@ -14,11 +14,8 @@ export default function BarCodeScan({ onScan }) {
   }, []);
 
   const handleBarCodeScanned = (scanData) => {
-    console.log("the data",scanData)
-    const { type, data } = scanData
     setScanned(true);
     onScan(scanData)
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {

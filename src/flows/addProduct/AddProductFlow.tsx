@@ -13,11 +13,17 @@ const initialState = {
     quantity: '1'
 }
 export default function AddProductFlow() {
-    const [scanData, setScanData] = useState({ data: '3424234' })
+    const [scanData, setScanData] = useState(null) //{ data: '3424234' }
     const [showDatePicker, setShowDatePicker] = useState(false)
     const [productData, setProductData] = useState<ProductData>(initialState)
-    const onScan = (newScanData) => {
-        setScanData(newScanData)
+    const onScan = async (newScanData) => {
+        try {
+            const { product } = await ProductService.getByBarcode(newScanData.data)
+            setProductData(product)
+            setScanData(newScanData)
+        } catch (error) {
+            console.log("Error getting the data of the barcode", JSON.stringify(error))
+        }
     }
     const updateProductData = (key, value) => {
         const newProductData = {
@@ -34,7 +40,6 @@ export default function AddProductFlow() {
     }
 
     const onChangeDate = (event, selectedDate) => {
-        console.log(event, selectedDate)
         setShowDatePicker(false)
         updateProductData('expiration', selectedDate)
     };
