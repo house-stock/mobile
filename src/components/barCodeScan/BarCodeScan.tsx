@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-
-export default function BarCodeScan({ onScan }) {
+export default function BarCodeScan({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -15,7 +14,7 @@ export default function BarCodeScan({ onScan }) {
 
   const handleBarCodeScanned = (scanData) => {
     setScanned(true);
-    onScan(scanData)
+    navigation.navigate('FillScanData', { data: { scanData } })
   };
 
   if (hasPermission === null) {
