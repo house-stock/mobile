@@ -3,8 +3,9 @@ export interface Product {
     productData: ProductData
 }
 
-export interface UserProduct extends Product {
-    userProductData: Array<Item>
+export interface UserProduct {
+    product: Product
+    item: Item
 }
 
 export type Item = {
