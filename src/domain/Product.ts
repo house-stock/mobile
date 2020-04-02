@@ -3,8 +3,7 @@ export interface Product {
     productData: ProductData
 }
 
-export interface UserProduct {
-    product: Product
+export interface UserProduct extends Product {
     item: Item
 }
 

@@ -1,7 +1,5 @@
 import React, { useState, useEffect, FC } from 'react';
 import { Text, View, StyleSheet, Button, TextInput } from 'react-native';
-import { Product } from '../../../domain/Product';
-import ProductService from '../../../services/product/ProductService';
 
 const ItemsQuantity = ({ navigation, route }) => {
     const { data } = route.params;

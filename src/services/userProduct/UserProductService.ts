@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Item, UserProduct } from "../../domain/Product";
 import DateProvider from '../../domain/DateProvider';
+import { successfulResponseHandler } from '../utils'
 
 export interface AddUserProduct {
     barcode: string,
@@ -25,7 +26,7 @@ class UserProductService {
     }
 
     getAll(params: UserProductsFilters): Promise<UserProduct[]> {
-        return axios.get(`${BASE_URL}/user/products`, { params }).then(response => response.data)
+        return axios.get(`${BASE_URL}/user/products`, { params }).then(successfulResponseHandler)
     }
 
     getProductToExpire(): Promise<UserProduct[]> {
