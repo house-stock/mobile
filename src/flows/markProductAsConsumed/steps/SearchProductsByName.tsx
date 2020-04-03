@@ -16,6 +16,10 @@ const SearchProductByName = ({ navigation }) => {
         }
     }
 
+    const onPressProduct = (product: Product) => {
+        navigation.navigate('SelectConsumedProducts', { data: product })
+    }
+
     return (
         <View>
             <Text>
@@ -23,7 +27,7 @@ const SearchProductByName = ({ navigation }) => {
             </Text>
             <SearchProduct searchProduct={onSearchProduct} />
             <View>
-                <ProductsList products={products} />
+                <ProductsList products={products} onPressProduct={onPressProduct} />
             </View>
         </View>
     );

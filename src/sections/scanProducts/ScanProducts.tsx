@@ -9,10 +9,10 @@ const Stack = createStackNavigator();
 
 function ScanProducts() {
     return (
-        <Stack.Navigator initialRouteName="Home" >
+        <Stack.Navigator initialRouteName="Home" screenOptions={{}} >
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="AddProductFlow" component={AddProductFlow} />
-            <Stack.Screen name="MarkProductAsConsumed" component={MarkProductAsConsumed} />
+            <Stack.Screen name="MarkProductAsConsumed" component={MarkProductAsConsumed} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }

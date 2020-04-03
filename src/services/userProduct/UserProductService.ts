@@ -11,10 +11,15 @@ export interface AddUserProduct {
 const BASE_URL = ""
 export interface UserProductsFilters {
     sort?: string
+    barcode?: string
     expiration_from?: string
     expiration_to?: string
 }
 class UserProductService {
+
+    markAsConsumed(products: UserProduct[]): Promise<any> {
+        return axios.put(`${BASE_URL}/user/products`, { status: 'CONSUMED', products })
+    }
 
     add(product: AddUserProduct): Promise<any> {
         const requestBody = {
@@ -26,7 +31,9 @@ class UserProductService {
     }
 
     getAll(params: UserProductsFilters): Promise<UserProduct[]> {
-        return axios.get(`${BASE_URL}/user/products`, { params }).then(successfulResponseHandler)
+        return axios.get(`${BASE_URL}/user/products`, { params })
+            .then(successfulResponseHandler)
+            .then(products => products.map(product => UserProduct.fromJson(product)))
     }
 
     getProductToExpire(): Promise<UserProduct[]> {
