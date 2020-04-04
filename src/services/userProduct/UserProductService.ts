@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Item, UserProduct } from "../../domain/Product";
+import { Item, UserProduct, UserProductFlat } from "../../domain/Product";
 import DateProvider from '../../domain/DateProvider';
 import { successfulResponseHandler } from '../utils'
 
@@ -17,7 +17,8 @@ export interface UserProductsFilters {
 }
 class UserProductService {
 
-    markAsConsumed(products: UserProduct[]): Promise<any> {
+    markAsConsumed(products: UserProductFlat[]): Promise<any> {
+        console.log("Go to mark as consumed ", products)
         return axios.put(`${BASE_URL}/user/products`, { status: 'CONSUMED', products })
     }
 

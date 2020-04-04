@@ -24,15 +24,36 @@ export class UserProduct extends Product {
         return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     }
 
+    get quantity(): number {
+        return this.item.quantity
+    }
+
+    set quantity(newQuantity: number) {
+        this.item.quantity = newQuantity
+    }
+
     static fromJson(json: any) {
-        return Object.assign(new UserProduct(), json)
+        const object: UserProduct = Object.assign(new UserProduct(), json)
+        object.item.expiration = new Date(object.item.expiration)
+        return object
+    }
+
+    clone() {
+        return Object.assign(new UserProduct(), { ...this })
     }
 }
 
+export interface UserProductFlat {
+    id?: number
+    barcode: string
+    expiration: string
+    quantity: number
+}
+
 export type Item = {
-    id: string,
+    id: number,
     expiration: Date
-    quantity: string
+    quantity: number
 }
 
 export type ProductData = {

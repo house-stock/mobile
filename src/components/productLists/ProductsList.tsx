@@ -11,9 +11,9 @@ interface ProductsListProps {
 const ProductsList = ({ products, onPressProduct }: ProductsListProps) => {
 
     return <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-        {products.map((product: UserProduct) => {
+        {products.map((product: UserProduct, index: number) => {
             const { productData, scanData, item } = product
-            return (<View style={{ flexBasis: '50%', padding: '0.5em' }}>
+            return (<View style={{ flexBasis: '50%', padding: 5 }} key={index}>
                 <View style={{ borderColor: 'black', borderWidth: 1 }}>
                     <Text> {productData.name} ({scanData.data})</Text>
                     {!!item && <Text> {item.expiration} - {item.quantity}</Text>}
