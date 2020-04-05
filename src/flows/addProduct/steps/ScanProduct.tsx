@@ -10,7 +10,7 @@ interface ScanProductProps {
 
 const ScanProduct = ({ navigation }: ScanProductProps) => {
     const onScan = async (scanData) => {
-        navigation.navigate('FillScanData', { data: { product: Product.fromJson(scanData) } })
+        navigation.navigate('FillScanData', { data: { product: Product.fromJson({ scanData }) } })
     }
     return <BarCodeScan onScan={onScan} />
 }
