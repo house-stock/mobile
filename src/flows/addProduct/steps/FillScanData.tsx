@@ -2,49 +2,45 @@ import React, { useState, useEffect, FC } from 'react';
 import { Text, View, StyleSheet, Button, TextInput } from 'react-native';
 import { Product } from '../../../domain/Product';
 import ProductService from '../../../services/product/ProductService';
+import { AddProductNavigation, StackNavigatorAddProduct } from '../AddProductFlow';
+import { RouteProp } from '@react-navigation/native';
 
-const FillScanData = ({ route, navigation }) => {
-    const { data } = route.params;
-    const { scanData } = data
+interface ScanProductProps {
+    navigation: AddProductNavigation,
+    route: RouteProp<StackNavigatorAddProduct, 'FillScanData'>;
+}
+
+const FillScanData = ({ route, navigation }: ScanProductProps) => {
+    const { data: { product: _product } } = route.params;
     const [productExists, setProductExists] = useState<boolean>(true)
-    const [product, setProduct] = useState<Product>({
-        scanData: scanData,
-        productData: {
-            name: ''
-        }
-    })
+    const [product, setProduct] = useState<Product>(_product)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const productResponse: Product = await ProductService.getByBarcode(scanData.data)
+                const productResponse: Product = await ProductService.getByBarcode(product.barcode)
                 if (!productResponse) {
                     setProductExists(false)
                 } else {
                     // TODO: ask the user if this product is the correct
-                    navigation.navigate('ItemsQuantity', { data: { ...data, ...productResponse } })
+                    navigation.navigate('ItemsQuantity', { data: { product: productResponse } })
                 }
             } catch (error) {
-                console.log("Error getting the data of the barcode", scanData.data, JSON.stringify(error))
+                console.log("Error getting the data of the barcode", product.barcode, JSON.stringify(error))
             }
         }
         fetchData();
     }, [])
 
     const onChangeName = (name) => {
-        const newProduct = {
-            ...product,
-            productData: {
-                ...product.productData,
-                name
-            }
-        }
-        setProduct(newProduct)
+        const copy = product.clone()
+        copy.productData.name = name
+        setProduct(copy)
     }
 
     const addProduct = async () => {
         try {
             await ProductService.addProduct(product)
-            navigation.navigate('ItemQuantity', { data: { ...data, ...product } })
+            navigation.navigate('ItemsQuantity', { data: { product } })
         } catch (error) {
             console.error("Error trying to create a product", error)
         }

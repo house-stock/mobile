@@ -16,7 +16,7 @@ const ProductsList = ({ products, onPressProduct }: ProductsListProps) => {
             return (<View style={{ flexBasis: '50%', padding: 5 }} key={index}>
                 <View style={{ borderColor: 'black', borderWidth: 1 }}>
                     <Text> {productData.name} ({scanData.data})</Text>
-                    {!!item && <Text> {item.expiration} - {item.quantity}</Text>}
+                    {!!item && <Text> {product.expiration} - {item.quantity}</Text>}
                     {onPressProduct && <Button title="V" onPress={() => onPressProduct(product)} />}
                 </View>
             </View>)

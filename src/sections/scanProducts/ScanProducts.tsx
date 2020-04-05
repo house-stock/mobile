@@ -5,13 +5,20 @@ import AddProductFlow from '../../flows/addProduct/AddProductFlow';
 import MarkProductAsConsumed from '../../flows/markProductAsConsumed/MarkProductAsConsumed';
 import Home from './Home';
 
-const Stack = createStackNavigator();
+export type ScanProductsNavigation = {
+    Home: undefined;
+    AddProductFlow: undefined;
+    MarkProductAsConsumed: undefined;
+};
+
+const Stack = createStackNavigator<ScanProductsNavigation>();
+
 
 function ScanProducts() {
     return (
-        <Stack.Navigator initialRouteName="Home" screenOptions={{}} >
+        <Stack.Navigator initialRouteName="Home" >
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="AddProductFlow" component={AddProductFlow} />
+            <Stack.Screen name="AddProductFlow" component={AddProductFlow} options={{ headerShown: false }} />
             <Stack.Screen name="MarkProductAsConsumed" component={MarkProductAsConsumed} options={{ headerShown: false }} />
         </Stack.Navigator>
     );

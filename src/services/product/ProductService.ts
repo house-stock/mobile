@@ -18,6 +18,7 @@ class ProductService {
     getByBarcode(barcode: string): Promise<Product> {
         return axios.get(`${BASE_URL}/products/barcode/${barcode}`)
             .then(successfulResponseHandler)
+            .then(json => Product.fromJson(json))
             .catch((error: AxiosError) => {
                 if (error.response.status === 404) {
                     return null

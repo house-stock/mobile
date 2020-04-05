@@ -1,15 +1,23 @@
-import React, { useState, useEffect, FC } from 'react';
-import { Text, View, StyleSheet, Button, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, Button, TextInput } from 'react-native';
+import { AddProductNavigation, StackNavigatorAddProduct } from '../AddProductFlow';
+import { RouteProp } from '@react-navigation/native';
 
-const ItemsQuantity = ({ navigation, route }) => {
-    const { data } = route.params;
+interface ItemsQuantityProps {
+    navigation: AddProductNavigation,
+    route: RouteProp<StackNavigatorAddProduct, 'ItemsQuantity'>;
+}
+
+const ItemsQuantity = ({ navigation, route }: ItemsQuantityProps) => {
+    const { data: { product } } = route.params;
     const [quantity, setQuantity] = useState<number>(1)
 
     const goToNextStep = () => {
         navigation.navigate(
             'FillProductData', {
             data: {
-                ...data, userProductData: [{ id: 1, expiration: new Date(), quantity }]
+                product,
+                userProductData: [{ id: 1, expiration: new Date(), quantity }]
             }
         })
     }

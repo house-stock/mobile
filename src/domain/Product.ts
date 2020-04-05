@@ -1,6 +1,6 @@
 export class Product {
     scanData: ScanData
-    productData: ProductData
+    productData: ProductData = new ProductData()
 
     get barcode() {
         return this.scanData.data
@@ -12,6 +12,10 @@ export class Product {
 
     static fromJson(json: any) {
         return Object.assign(new Product(), json)
+    }
+
+    clone() {
+        return Object.assign(new Product(), { ...this })
     }
 }
 
@@ -56,8 +60,8 @@ export type Item = {
     quantity: number
 }
 
-export type ProductData = {
-    name: string
+export class ProductData {
+    name: string = ''
 }
 
 export type ScanData = {

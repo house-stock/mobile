@@ -31,7 +31,7 @@ class UserProductService {
         return axios.post(`${BASE_URL}/user/products`, requestBody)
     }
 
-    getAll(params: UserProductsFilters): Promise<UserProduct[]> {
+    getAll(params: UserProductsFilters = {}): Promise<UserProduct[]> {
         return axios.get(`${BASE_URL}/user/products`, { params })
             .then(successfulResponseHandler)
             .then(products => products.map(product => UserProduct.fromJson(product)))

@@ -4,9 +4,15 @@ import { Text, View, Button, TextInput } from 'react-native';
 import { Product, UserProduct } from '../../../domain/Product';
 import UserProductService from '../../../services/userProduct/UserProductService';
 import DateProvider from '../../../domain/DateProvider';
+import { RouteProp } from '@react-navigation/native';
+import { MarkAsConsumedNavigation, StackNavigatorConsumed } from '../MarkProductAsConsumed';
+interface SelectConsumedProductsProps {
+    route: RouteProp<StackNavigatorConsumed, 'SelectConsumedProducts'>;
+    navigation: MarkAsConsumedNavigation;
+};
 
 
-const SelectConsumedProducts = ({ route, navigation }) => {
+const SelectConsumedProducts = ({ route, navigation }: SelectConsumedProductsProps) => {
     const product: Product = Product.fromJson(route.params.data);
     const [userProducts, setUserProducts] = useState<UserProduct[]>([])
     const [consumedProducts, setConsumedProducts] = useState<UserProduct[]>([])
@@ -41,7 +47,7 @@ const SelectConsumedProducts = ({ route, navigation }) => {
 
             await UserProductService.markAsConsumed(productsToModify)
             //TODO: Add a feedback screen
-            navigation.navigate('Home', { data: {} })
+            navigation.navigate('Home', undefined)
         } catch (error) {
             console.log("Error mark as consumed products", error)
         }
