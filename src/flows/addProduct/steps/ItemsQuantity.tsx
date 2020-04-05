@@ -22,7 +22,7 @@ const ItemsQuantity = ({ navigation, route }: ItemsQuantityProps) => {
         })
     }
     const onChangeCustomQuantity = (newQuantity) => {
-        setQuantity(Number.parseInt(newQuantity, 10))
+        setQuantity(Number.parseInt(newQuantity || 0, 10))
     }
     return <View>
         <Text> Cuantos productos de este tipo vas a agregar ?</Text>

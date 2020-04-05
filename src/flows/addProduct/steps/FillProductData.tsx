@@ -46,7 +46,7 @@ const FillProductData = ({ navigation, route }: FillProductDataProps) => {
                 items: items
             })
             // TODO: add a feedback message
-            navigation.navigate('Scan', undefined)
+            navigation.navigate('AddProductSuccessFeedback', { data: { product, userProductData } })
         } catch (error) {
             console.log('error trying to add a user product', error)
         }
