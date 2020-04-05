@@ -8,12 +8,14 @@ import ScanProduct from './steps/ScanProduct';
 import { Product } from '../../domain/Product';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { ScanProductsNavigation } from '../../sections/scanProducts/ScanProducts';
+import MarkAsConsumedSuccessFeedback from './steps/MarkAsConsumedSuccessFeedback';
 
 export type StackNavigatorConsumed = {
     SelectFlowType: undefined;
     SearchProductsByName: undefined;
     ScanProduct: undefined;
     SelectConsumedProducts: { data: Product };
+    MarkAsConsumedSuccessFeedback: { data: Product };
 };
 
 export type MarkAsConsumedNavigation = CompositeNavigationProp<
@@ -29,6 +31,7 @@ function MarkProductAsConsumed() {
             <Stack.Screen name="SearchProductsByName" component={SearchProductsByName} />
             <Stack.Screen name="ScanProduct" component={ScanProduct} />
             <Stack.Screen name="SelectConsumedProducts" component={SelectConsumedProducts} />
+            <Stack.Screen name="MarkAsConsumedSuccessFeedback" component={MarkAsConsumedSuccessFeedback} />
         </Stack.Navigator>
     );
 }

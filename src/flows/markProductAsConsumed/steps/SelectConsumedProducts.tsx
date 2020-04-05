@@ -47,7 +47,7 @@ const SelectConsumedProducts = ({ route, navigation }: SelectConsumedProductsPro
 
             await UserProductService.markAsConsumed(productsToModify)
             //TODO: Add a feedback screen
-            navigation.navigate('Home', undefined)
+            navigation.navigate('MarkAsConsumedSuccessFeedback', { data: product})
         } catch (error) {
             console.log("Error mark as consumed products", error)
         }
