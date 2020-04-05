@@ -6,7 +6,14 @@ import ProductsToExpire from './ProductsToExpire';
 import ExpiredProducts from './ExpiredProducts';
 import AllProducts from './AllProducts';
 
-const Stack = createStackNavigator();
+export type StackNavigatorUserProducts = {
+    Home: undefined
+    AllProducts: undefined
+    ProductsToExpire: undefined
+    ExpiredProducts: undefined
+}
+
+const Stack = createStackNavigator<StackNavigatorUserProducts>();
 
 function UserProducts() {
     return (

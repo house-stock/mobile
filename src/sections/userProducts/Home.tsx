@@ -2,8 +2,14 @@
 
 import React from 'react';
 import { Text, View, Button } from 'react-native';
+import { NavigationProp } from '@react-navigation/native';
+import { StackNavigatorUserProducts } from './UserProducts';
 
-const Home = ({ navigation }) => {
+interface HomeProps {
+    navigation: NavigationProp<StackNavigatorUserProducts, 'Home'>,
+}
+
+const Home = ({ navigation }: HomeProps) => {
     return (
         <View>
             <Text>
