@@ -27,11 +27,11 @@ const Stack = createStackNavigator<StackNavigatorAddProduct>();
 function AddProductFlow() {
     return (
         <Stack.Navigator initialRouteName="Scan" >
-            <Stack.Screen name="Scan" component={ScanProduct} />
-            <Stack.Screen name="FillScanData" component={FillScanData} />
-            <Stack.Screen name="ItemsQuantity" component={ItemsQuantity} />
-            <Stack.Screen name="FillProductData" component={FillProductData} />
-            <Stack.Screen name="AddProductSuccessFeedback" component={AddProductSuccessFeedback} />
+            <Stack.Screen name="Scan" component={ScanProduct} options={{ title: 'Agregar producto - Escanear' }} />
+            <Stack.Screen name="FillScanData" component={FillScanData} options={{ title: 'Informacion del Producto' }} />
+            <Stack.Screen name="ItemsQuantity" component={ItemsQuantity} options={{ title: 'Cantidad' }} />
+            <Stack.Screen name="FillProductData" component={FillProductData} options={{ title: 'Vencimientos' }} />
+            <Stack.Screen name="AddProductSuccessFeedback" component={AddProductSuccessFeedback} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }

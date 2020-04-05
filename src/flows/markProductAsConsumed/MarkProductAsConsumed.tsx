@@ -19,19 +19,19 @@ export type StackNavigatorConsumed = {
 };
 
 export type MarkAsConsumedNavigation = CompositeNavigationProp<
-    StackNavigationProp<ScanProductsNavigation,'MarkProductAsConsumed'>,
+    StackNavigationProp<ScanProductsNavigation, 'MarkProductAsConsumed'>,
     StackNavigationProp<StackNavigatorConsumed>>
- 
+
 const Stack = createStackNavigator<StackNavigatorConsumed>();
 
 function MarkProductAsConsumed() {
     return (
         <Stack.Navigator initialRouteName="SelectFlowType" >
-            <Stack.Screen name="SelectFlowType" component={SelectFlowType} />
-            <Stack.Screen name="SearchProductsByName" component={SearchProductsByName} />
-            <Stack.Screen name="ScanProduct" component={ScanProduct} />
-            <Stack.Screen name="SelectConsumedProducts" component={SelectConsumedProducts} />
-            <Stack.Screen name="MarkAsConsumedSuccessFeedback" component={MarkAsConsumedSuccessFeedback} />
+            <Stack.Screen name="SelectFlowType" component={SelectFlowType} options={{ title: 'Consumir producto' }} />
+            <Stack.Screen name="SearchProductsByName" component={SearchProductsByName} options={{ title: 'Buscar por nombre' }} />
+            <Stack.Screen name="ScanProduct" component={ScanProduct} options={{ title: 'Escanear' }} />
+            <Stack.Screen name="SelectConsumedProducts" component={SelectConsumedProducts} options={{ title: 'Seleccionar vencimientos' }} />
+            <Stack.Screen name="MarkAsConsumedSuccessFeedback" component={MarkAsConsumedSuccessFeedback} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }

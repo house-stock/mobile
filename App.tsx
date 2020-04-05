@@ -5,10 +5,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import UserProducts from './src/sections/userProducts/UserProducts';
 import ScanProducts from './src/sections/scanProducts/ScanProducts';
 
-export type AppNavigation =  {
+export type AppNavigation = {
   TabUserProducts: undefined
   TabScanProducts: undefined
-} 
+}
 const Tab = createBottomTabNavigator<AppNavigation>();
 
 
@@ -19,8 +19,8 @@ export default function App() {
       <StatusBar hidden />
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="TabUserProducts" component={UserProducts} />
-          <Tab.Screen name="TabScanProducts" component={ScanProducts} />
+          <Tab.Screen name="TabUserProducts" component={UserProducts} options={{ title: 'Mis productos' }} />
+          <Tab.Screen name="TabScanProducts" component={ScanProducts} options={{ title: 'Escanear' }} />
         </Tab.Navigator>
       </NavigationContainer>
     </>
