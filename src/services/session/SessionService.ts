@@ -2,6 +2,18 @@ import { AsyncStorage } from "react-native"
 
 const TOKEN = 'token'
 class SessionService {
+    logoutCallback: () => void
+
+    init(logoutCallback) {
+        this.logoutCallback = logoutCallback
+    }
+
+    async logout() {
+        return AsyncStorage.removeItem(TOKEN)
+            .then(() => {
+                this.logoutCallback()
+            })
+    }
 
     saveToken(token: string): Promise<any> {
         return AsyncStorage.setItem(TOKEN, token)
@@ -15,6 +27,10 @@ class SessionService {
             console.log("Error accesing to the async storage", error)
             return false
         }
+    }
+
+    getToken(): Promise<string> {
+        return AsyncStorage.getItem(TOKEN)
     }
 }
 

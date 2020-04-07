@@ -1,25 +1,23 @@
-import axios from 'axios'
 import { Item, UserProduct, UserProductFlat } from "../../domain/Product";
 import DateProvider from '../../domain/DateProvider';
-import { successfulResponseHandler } from '../utils'
+import BaseService from '../BaseService';
 
 export interface AddUserProduct {
     barcode: string,
     items: Array<Item>
 }
 
-const BASE_URL = ""
 export interface UserProductsFilters {
     sort?: string
     barcode?: string
     expiration_from?: string
     expiration_to?: string
 }
-class UserProductService {
+class UserProductService extends BaseService {
 
     markAsConsumed(products: UserProductFlat[]): Promise<any> {
         console.log("Go to mark as consumed ", products)
-        return axios.put(`${BASE_URL}/user/products`, { status: 'CONSUMED', products })
+        return this.put('/user/products', { status: 'CONSUMED', products })
     }
 
     add(product: AddUserProduct): Promise<any> {
@@ -28,12 +26,11 @@ class UserProductService {
             items: product.items.map(({ id, ...item }) => ({ ...item, expiration: DateProvider.toApiFormat(item.expiration) }))
         }
         console.log('Go to add this user Product', requestBody)
-        return axios.post(`${BASE_URL}/user/products`, requestBody)
+        return this.post('/user/products', requestBody)
     }
 
     getAll(params: UserProductsFilters = {}): Promise<UserProduct[]> {
-        return axios.get(`${BASE_URL}/user/products`, { params })
-            .then(successfulResponseHandler)
+        return this.get('/user/products', { params })
             .then(products => products.map(product => UserProduct.fromJson(product)))
     }
 

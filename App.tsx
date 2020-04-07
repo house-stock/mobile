@@ -21,6 +21,7 @@ export default function App() {
   const [userIsLogged, setUserIsLogged] = useState<boolean>(false)
 
   useEffect(() => {
+    SessionService.init(() => setUserIsLogged(false))
     const fetchData = async () => {
       try {
         const isLogged: boolean = await SessionService.userIsLogged()

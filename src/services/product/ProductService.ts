@@ -1,26 +1,24 @@
-import axios, { AxiosError } from 'axios'
+import { AxiosResponse } from 'axios'
 import { Product } from "../../domain/Product";
-import { successfulResponseHandler } from '../utils'
+import BaseService from '../BaseService';
 
-const BASE_URL = ""
 
-class ProductService {
+class ProductService extends BaseService {
 
-    getByName(name: any) : Promise<Product[]> {
-        return axios.get(`${BASE_URL}/products`, { params: { name } }).then(successfulResponseHandler)
+    getByName(name: any): Promise<Product[]> {
+        return this.get('/products', { params: { name } })
     }
 
     addProduct(product: Product): Promise<any> {
         console.log('Go to add', product)
-        return axios.post(`${BASE_URL}/products`, product)
+        return this.post('/products', product)
     }
 
     getByBarcode(barcode: string): Promise<Product> {
-        return axios.get(`${BASE_URL}/products/barcode/${barcode}`)
-            .then(successfulResponseHandler)
+        return this.get(`/products/barcode/${barcode}`, {})
             .then(json => Product.fromJson(json))
-            .catch((error: AxiosError) => {
-                if (error.response.status === 404) {
+            .catch((error: AxiosResponse) => {
+                if (error.status === 404) {
                     return null
                 }
                 console.log("Error getting product by bar code", JSON.stringify(error.response.status))
