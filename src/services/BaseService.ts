@@ -1,15 +1,13 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import SessionService from "./session/SessionService"
 import { successfulResponseHandler } from './utils'
-
-const BASE_URL = ''
-
+import { BASE_URL } from './config';
 
 const errorRequestHandler = async (error: AxiosError) => {
     const { response } = error;
     if (response) {
         if (response.status === 403 || 401) {
-            SessionService.logout();
+            SessionService._logout();
         }
         throw response.data;
     }

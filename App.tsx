@@ -7,10 +7,12 @@ import ScanProducts from './src/sections/scanProducts/ScanProducts';
 import SessionService from './src/services/session/SessionService';
 import Login from './src/sections/login/Login';
 import { AuthContext } from './src/context/AuthContext';
+import Profile from './src/sections/profile/Profile';
 
 export type AppNavigation = {
   TabUserProducts: undefined
   TabScanProducts: undefined
+  Profile: undefined
 }
 const Tab = createBottomTabNavigator<AppNavigation>();
 
@@ -44,10 +46,19 @@ export default function App() {
     }
   }
 
+  const logout = async () => {
+    try {
+      SessionService.removeToken()
+      setUserIsLogged(false)
+    } catch (error) {
+      console.log("Error logout the user", error)
+    }
+  }
+
   const value = {
     userIsLogged,
-    login
-    // TODO:logout
+    login,
+    logout
   }
   if (appIsLoading) {
     return <View>
@@ -61,8 +72,9 @@ export default function App() {
         {userIsLogged ?
           (
             <Tab.Navigator>
-              <Tab.Screen name="TabUserProducts" component={UserProducts} options={{ title: 'Mis productos' }} />
+              <Tab.Screen name="Profile" component={Profile} options={{ title: 'Perfil' }} />
               <Tab.Screen name="TabScanProducts" component={ScanProducts} options={{ title: 'Escanear' }} />
+              <Tab.Screen name="TabUserProducts" component={UserProducts} options={{ title: 'Mis productos' }} />
             </Tab.Navigator>
           ) : <Login />}
       </NavigationContainer>

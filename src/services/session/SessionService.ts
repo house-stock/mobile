@@ -8,8 +8,8 @@ class SessionService {
         this.logoutCallback = logoutCallback
     }
 
-    async logout() {
-        return AsyncStorage.removeItem(TOKEN)
+    async _logout() { // ! This is a internal hack to be able to change the UI inside the BaseService 
+        return this.removeToken()
             .then(() => {
                 this.logoutCallback()
             })
@@ -31,6 +31,10 @@ class SessionService {
 
     getToken(): Promise<string> {
         return AsyncStorage.getItem(TOKEN)
+    }
+
+    removeToken(): Promise<any> {
+        return AsyncStorage.removeItem(TOKEN)
     }
 }
 
