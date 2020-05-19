@@ -49,6 +49,10 @@ const FillScanData = ({ route, navigation }: ScanProductProps) => {
         {productExists
             ? <Text>Loading</Text>
             : <View>
+
+                <Text>
+                No tenemos info de este producto,  nos ayudas ?
+                </Text>
                 <TextInput
                     value={product.productData.name}
                     onChangeText={onChangeName}

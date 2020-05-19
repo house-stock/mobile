@@ -6,7 +6,9 @@ import { BASE_URL } from './config';
 const errorRequestHandler = async (error: AxiosError) => {
     const { response } = error;
     if (response) {
-        if (response.status === 403 || 401) {
+        const { status } = response
+        if (status === 403 || status === 401) {
+            // console.log("Unathorized request", response)
             SessionService._logout();
         }
         throw response.data;

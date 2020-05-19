@@ -11,7 +11,7 @@ interface HomeProps {
 
 const Home = ({ navigation }: HomeProps) => {
     return (
-        <View>
+        <View style={{ padding: 5 }}>
             <Text>
                 Tus productos
             </Text>

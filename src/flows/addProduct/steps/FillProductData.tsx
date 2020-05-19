@@ -66,7 +66,7 @@ const FillProductData = ({ navigation, route }: FillProductDataProps) => {
         <Text>{product.name}</Text>
         <Text> El codigo de barra es: {product.barcode}</Text>
         {items.map(userProduct => <UserProduct product={userProduct} onChangeExpiration={onChangeExpiration} />)}
-        <Button onPress={addProduct} title="Agregar" />
+        <Button onPress={addProduct} title="Finalizar" />
     </View>
 }
 

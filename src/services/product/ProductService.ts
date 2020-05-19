@@ -21,7 +21,7 @@ class ProductService extends BaseService {
                 if (error.status === 404) {
                     return null
                 }
-                console.log("Error getting product by bar code", JSON.stringify(error.response.status))
+                console.log("Error getting product by bar code", JSON.stringify(error.status))
 
                 throw error
             })
